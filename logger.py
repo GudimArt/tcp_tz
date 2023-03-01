@@ -1,5 +1,7 @@
 import logging
 import logging.handlers
+import os
+
 
 def init_logger(name):
     logger = logging.getLogger(name)
@@ -8,6 +10,8 @@ def init_logger(name):
     sh = logging.StreamHandler()
     sh.setFormatter(logging.Formatter(FORMAT))
     sh.setLevel(logging.DEBUG)
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
     fh = logging.FileHandler(filename=f'logs/{name}')
     fh.setFormatter(logging.Formatter(FORMAT))
     fh.setLevel(logging.INFO)
